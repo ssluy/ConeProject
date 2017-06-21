@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/main.cpp
+iostream
+-
+stdio.h
+-
+math.h
+-
+
