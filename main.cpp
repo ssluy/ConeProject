@@ -26,8 +26,10 @@ double distance(struct Point1, struct Point2){
  * This is the Structure for the Cone
  */
 struct Cone{
-    double radius;
-    double height;
+    struct Point center;   // The center of the cone
+    struct Point tip;   // The Tip of the cone
+    double radius;     //The radius of the cone
+
 };
 
 /**
