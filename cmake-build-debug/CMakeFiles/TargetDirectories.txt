@@ -1,0 +1,3 @@
+/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/cmake-build-debug/CMakeFiles/Cone.dir
