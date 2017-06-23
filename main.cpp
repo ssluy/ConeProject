@@ -1,43 +1,55 @@
 #include <iostream>
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 int const PI = 3.14;
 
-//----------------------------Point--------------------------------//
-
-/**
- * This is the Structure for the Point
- */
 struct Point{
     double x;
     double y;
     double z;
 };
 
-/**
- * Function to find the Distance between 2 Points
- *
- * @return d
- */
-double distance(struct Point Point1, struct Point Point2){
-    //Below is the function to calculate the distance between 2 points
-    double d = sqrt(pow(Point1.x - Point2.x, 2) + pow(Point1.y - Point2.y, 2) + pow(Point1.z - Point2.z, 2));
-    return d;
-}
-
-
-//----------------------------Cone---------------------------------//
-
-/**
- * This is the Structure for the Cone
- */
-struct Cone{
+struct Cone {
     struct Point center;   // The center of the base area of the cone
     struct Point tip;   // The Tip of the cone
     double radius;     //The radius of the cone
 
 };
+
+double distance(struct Point Point1, struct Point Point2);
+double surfaceArea(double r, double h);
+double volume(double r, double h);
+void writeRandomCones(int cones);
+void readFile();
+
+
+int main() {
+
+    //number of cones
+    int cones;
+
+    printf("Please enter the number of cones you want: ");
+    scanf("%d", &cones);
+
+    writeRandomCones(cones);
+
+    readFile();
+
+    return 0;
+}   //end of main
+
+/**
+ * Function to find the Distance between 2 Points
+ *
+ * @return d
+ */
+double distance(struct Point Point1, struct Point Point2) {
+    //Below is the function to calculate the distance between 2 points
+    double d = sqrt(pow(Point1.x - Point2.x, 2) + pow(Point1.y - Point2.y, 2) + pow(Point1.z - Point2.z, 2));
+    return d;
+}
 
 /**
  * This is the function to find the surface area of a cone
@@ -67,52 +79,88 @@ double volume(double r, double h) {
 
 }   //end of volume(double r, double h)
 
-//----------------------------Main---------------------------------//
+//---------------------------Others--------------------------------//
 
 /**
- * This is the main class
+ * A function to write random cone data to file.
  *
- * @return 0
- */
-int main() {
+ * @param cones - The number of cones
+ * @return void
+ * @author Socretquuliqaa Lee
+ * */
+void writeRandomCones(int cones) {
 
+    FILE *file;
+
+    file = fopen("PreprocessedConeData.txt", "w+");
+
+    for (int i = 0; i < cones; i++) {
+
+        //loop through the numbers in one line
+        for (int j = 0; j < 7; j++) {
+            float a = 100.0;
+            float x = (float)rand()/(RAND_MAX/a);
+            fprintf(file, "%.2f\t", x);
+        }   //end of j loop
+
+        fprintf(file,"\n");
+
+    }   //end of i loop
+
+    printf("%d cones has been generated into PreprocessedConeData.txt", cones);
+
+}   //end of void writeRandomCones(int cones)
+
+/**
+ *
+ * */
+void readFile() {
+
+    FILE *source;
+
+    //coordinates of center
     double xC, yC, zC;
+
+    //coordinates of tip
     double xT, yT, zT;
+
+    //cone radius
     double r;
 
-    printf("Please enter the coordinates of the Center of the base area of the Cone: ");
-    scanf("%lf %lf %lf", &xC, &yC, &zC);
+    //open file
+    source = fopen("PreprocessedConeData.txt", "r");
 
-    printf("Please enter the coordinates of the Tip of the Cone: ");
-    scanf("%lf %lf %lf", &xT, &yT, &zT);
+    //check line
+    double l = fscanf(source, "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf", &xC, &yC,&zC, &xT, &yT, &zT, &r);
 
-    printf("Please enter the radius the Cone: ");
-    scanf("%lf", &r);
+    while (l != 7) {
 
-    struct Point center {xC, yC, zC};
+        struct Point center {xC, yC, zC};
 
-    struct Point tip {xT, yT, zT};
+        struct Point tip {xT, yT, zT};
 
+        struct Cone myCone {center, tip, r};
 
-    struct Cone myCone {
-            center,
-            tip,
-            r
-    };
+        //Calculate the Height of the Cone
+        double h = distance(myCone.center, myCone.tip);
 
-    //Calculate the Height of the Cone
-    double h = distance(myCone.center, myCone.tip);
+        //Calculate the Surface Area of the Cone
+        double s = surfaceArea(myCone.radius, h);
 
-    //Calculate the Surface Area of the Cone
-    double s = surfaceArea(myCone.radius, h);
+        //Calculate the Volume of the Cone
+        double v = volume(myCone.radius, h);
 
-    //Calculate the Volume of the Cone
-    double v = volume(myCone.radius, h);
+        printf("The height of the Cone is: %.2f\n" , h);
+        printf("The surface area of the Cone is: %.2f\n" , s);
+        printf("The Volume of the Cone is: %.2f\n", v);
 
-    //Print the Results
-    printf("The height of the Cone is: %.2f\n" , h);
-    printf("The surface area of the Cone is: %.2f\n" , s);
-    printf("The Volume of the Cone is: %.2f", v);
+        printf("\n");
+        printf("\n");
 
-    return 0;
-}
+        l = fscanf(source, "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf", &xC, &yC,&zC, &xT, &yT, &zT, &r);
+
+    }   //end of while (l != EOF)
+
+    fclose(source);
+
+}   //end of void readFile(char sourceFile[])
