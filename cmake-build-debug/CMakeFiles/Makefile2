@@ -54,10 +54,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone"
+CMAKE_SOURCE_DIR = /Users/socretlee/CLionProjects/ConeProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/cmake-build-debug"
+CMAKE_BINARY_DIR = /Users/socretlee/CLionProjects/ConeProject/cmake-build-debug
 
 #=============================================================================
 # Target rules for target CMakeFiles/Cone.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = "/Users/sereysathialuy/Public/Zaman University/Semester IV/Pr
 CMakeFiles/Cone.dir/all:
 	$(MAKE) -f CMakeFiles/Cone.dir/build.make CMakeFiles/Cone.dir/depend
 	$(MAKE) -f CMakeFiles/Cone.dir/build.make CMakeFiles/Cone.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/cmake-build-debug/CMakeFiles" --progress-num=1,2 "Built target Cone"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/socretlee/CLionProjects/ConeProject/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target Cone"
 .PHONY : CMakeFiles/Cone.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/Cone.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Cone.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/cmake-build-debug/CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/socretlee/CLionProjects/ConeProject/cmake-build-debug/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Cone.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/cmake-build-debug/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/socretlee/CLionProjects/ConeProject/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/Cone.dir/rule
 
 # Convenience name for target.

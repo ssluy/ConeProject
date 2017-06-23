@@ -1,4 +1,4 @@
-# Install script for directory: /Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone
+# Install script for directory: /Users/socretlee/CLionProjects/ConeProject
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/sereysathialuy/Public/Zaman University/Semester IV/Programming in C & C++/Projects/Cone/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/socretlee/CLionProjects/ConeProject/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <math.h>
 
+int const PI = 3.14;
+
 //----------------------------Point--------------------------------//
 
 /**
@@ -40,20 +42,30 @@ struct Cone{
 /**
  * This is the function to find the surface area of a cone
  *
- * @return
+ * @param h - The height of the cone
+ * @param r - The radius of the base of the cone
+ * @return The surface area of the cone
+ * @author Socretquuliqaa Lee
  */
-double surfaceArea(double r, double h){
+double surfaceArea(double r, double h) {
 
-}
+    return (PI * r) * (r + sqrt(pow(h, 2) + pow(r,2)));
+
+}   //end of surfaceArea(double r, double h)
 
 /**
  * This is the function to find the Volume of a Cone
  *
- * @return
+ * @param h - The height of the cone
+ * @param r - The radius of the base of the cone
+ * @return The volume of the cone
+ * @author Socretquuliqaa Lee
  */
-double Volume(double r, double h){
+double volume(double r, double h) {
 
-}
+    return (PI * pow(r, 2) * (h/(double)3));
+
+}   //end of volume(double r, double h)
 
 //----------------------------Main---------------------------------//
 
@@ -64,21 +76,29 @@ double Volume(double r, double h){
  */
 int main() {
 
-    struct Point center;
+    double xC, yC, zC;
+    double xT, yT, zT;
+    double r;
+
     printf("Please enter the coordinates of the Center of the base area of the Cone: ");
-    scanf("%f %f %f", &center.x, &center.y, &center.z);
+    scanf("%lf %lf %lf", &xC, &yC, &zC);
 
-    struct Point tip;
     printf("Please enter the coordinates of the Tip of the Cone: ");
-    scanf("%f %f %f", &tip.x, &tip.y, &tip.z);
-
-    struct Cone myCone{
-            center,
-            tip,
-    };
+    scanf("%lf %lf %lf", &xT, &yT, &zT);
 
     printf("Please enter the radius the Cone: ");
-    scanf("%f", &myCone.radius);
+    scanf("%lf", &r);
+
+    struct Point center {xC, yC, zC};
+
+    struct Point tip {xT, yT, zT};
+
+
+    struct Cone myCone {
+            center,
+            tip,
+            r
+    };
 
     //Calculate the Height of the Cone
     double h = distance(myCone.center, myCone.tip);
@@ -87,12 +107,12 @@ int main() {
     double s = surfaceArea(myCone.radius, h);
 
     //Calculate the Volume of the Cone
-    double v = Volume(myCone.radius, h);
+    double v = volume(myCone.radius, h);
 
     //Print the Results
-    printf("The height of the Cone is: %f" , h);
-    printf("The surface area of the Cone is: %f" , s);
-    printf("The Volume of the Cone is: %f", v);
+    printf("The height of the Cone is: %.2f\n" , h);
+    printf("The surface area of the Cone is: %.2f\n" , s);
+    printf("The Volume of the Cone is: %.2f", v);
 
     return 0;
 }
