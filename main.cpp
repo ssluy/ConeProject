@@ -18,13 +18,18 @@ struct Cone {
 
 };
 
+double random_number(double min_num, double max_num);
 double distance(struct Point Point1, struct Point Point2);
 double surfaceArea(double r, double h);
 double volume(double r, double h);
 void writeRandomCones(int cones);
 void readFile();
 
-
+/**
+ * This is the main
+ *
+ * @return 0
+ */
 int main() {
 
     //number of cones
@@ -37,8 +42,22 @@ int main() {
 
     readFile();
 
+    printf("Done");
     return 0;
 }   //end of main
+
+/**
+ * function to generate a random double value
+ *
+ * @param min_num
+ * @param max_num
+ * @return
+ */
+double random_number(double min_num, double max_num)
+{
+    double f = (double)rand() / RAND_MAX;
+    return min_num + f * (max_num - min_num);
+}
 
 /**
  * Function to find the Distance between 2 Points
@@ -96,18 +115,25 @@ void writeRandomCones(int cones) {
 
     for (int i = 0; i < cones; i++) {
 
-        //loop through the numbers in one line
-        for (int j = 0; j < 7; j++) {
-            float a = 100.0;
-            float x = (float)rand()/(RAND_MAX/a);
+        //loop through and generate the coordinate of the center and tip
+        for (int j = 0; j < 6; j++) {
+            float max = 20;
+            float min = -20;
+            float x = random_number(min, max);
             fprintf(file, "%.2f\t", x);
         }   //end of j loop
+
+            //generate a random radius value
+            float r = random_number(1, 20);
+            fprintf(file, "%.2f\t", r);
 
         fprintf(file,"\n");
 
     }   //end of i loop
 
-    printf("%d cones has been generated into PreprocessedConeData.txt", cones);
+    printf("%d cones has been generated into PreprocessedConeData.txt \n\n", cones);
+
+    fclose(file);
 
 }   //end of void writeRandomCones(int cones)
 
@@ -117,50 +143,54 @@ void writeRandomCones(int cones) {
 void readFile() {
 
     FILE *source;
+    FILE *output;
 
     //coordinates of center
     double xC, yC, zC;
-
     //coordinates of tip
     double xT, yT, zT;
-
     //cone radius
     double r;
 
     //open file
     source = fopen("PreprocessedConeData.txt", "r");
+    //open and create a file to put the result
+    output = fopen("output.txt", "w+");
+
 
     //check line
-    double l = fscanf(source, "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf", &xC, &yC,&zC, &xT, &yT, &zT, &r);
+    double l = fscanf(source, "%lf%lf%lf%lf%lf%lf%lf", &xC, &yC,&zC, &xT, &yT, &zT, &r);
 
-    while (l != 7) {
+    while (l != EOF) {
 
         struct Point center {xC, yC, zC};
-
         struct Point tip {xT, yT, zT};
-
         struct Cone myCone {center, tip, r};
 
         //Calculate the Height of the Cone
         double h = distance(myCone.center, myCone.tip);
-
         //Calculate the Surface Area of the Cone
         double s = surfaceArea(myCone.radius, h);
-
         //Calculate the Volume of the Cone
         double v = volume(myCone.radius, h);
+
+        //put the result in the output.txt
+        fprintf(output, "%.2f\t%.2f\t%.2f\n" , h , s, v);
 
         printf("The height of the Cone is: %.2f\n" , h);
         printf("The surface area of the Cone is: %.2f\n" , s);
         printf("The Volume of the Cone is: %.2f\n", v);
 
         printf("\n");
-        printf("\n");
 
-        l = fscanf(source, "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf", &xC, &yC,&zC, &xT, &yT, &zT, &r);
+        //Check the next line
+        l = fscanf(source, "%lf%lf%lf%lf%lf%lf%lf", &xC, &yC,&zC, &xT, &yT, &zT, &r);
+
 
     }   //end of while (l != EOF)
 
+    printf("The output has been store in the output.txt");
     fclose(source);
+    fclose(output);
 
 }   //end of void readFile(char sourceFile[])
