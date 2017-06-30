@@ -22,7 +22,7 @@ double random_number(double min_num, double max_num);
 double distance(struct Point Point1, struct Point Point2);
 double surfaceArea(double r, double h);
 double volume(double r, double h);
-void writeRandomCones(int cones);
+void writeRandomCones(int cone);
 void readFile();
 
 /**
@@ -32,17 +32,21 @@ void readFile();
  */
 int main() {
 
-    //number of cones
-    int cones;
+    /**
+     * This is the first version where we generate our own data
+     */
+//    //number of cones
+//    int cones;
+//
+//    printf("Please enter the number of cones you want: ");
+//    scanf("%d", &cones);
+//
+//    writeRandomCones(cones);
 
-    printf("Please enter the number of cones you want: ");
-    scanf("%d", &cones);
-
-    writeRandomCones(cones);
-
+    //call the read function
     readFile();
 
-    printf("Done");
+    printf("\nDone");
     return 0;
 }   //end of main
 
@@ -137,7 +141,9 @@ void writeRandomCones(int cones) {
 
 }   //end of void writeRandomCones(int cones)
 
+
 /**
+ * This is a function to read the file and output the input into the output.txt file
  *
  * */
 void readFile() {
@@ -152,8 +158,14 @@ void readFile() {
     //cone radius
     double r;
 
+    char fname[100];
+    memset(fname, 0, 100);
+    //Ask user for input
+    printf("Enter the name of the file with the Cone Data: ");
+    gets(fname);    //There will be warning but the program works
+
     //open file
-    source = fopen("PreprocessedConeData.txt", "r");
+    source = fopen(fname, "r");
     //open and create a file to put the result
     output = fopen("output.txt", "w+");
 
