@@ -201,7 +201,7 @@ void readFile() {
 
     }   //end of while (l != EOF)
 
-    printf("The output has been store in the output.txt");
+    printf("The output has been store in the output.txt\n");
     fclose(source);
     fclose(output);
 
